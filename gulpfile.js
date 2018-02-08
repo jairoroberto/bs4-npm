@@ -4,7 +4,7 @@ var sass        = require('gulp-sass');
 
 // Compilar o sass
 gulp.task('sass', function(){
-  return gulp.src(['node_modules/bootstrap/scss/bootstrap.scss', 'src/scss/*.scss'])
+  return gulp.src(['node_modules/slick-carousel/slick/slick-theme.scss', 'node_modules/slick-carousel/slick/slick.scss', 'src/scss/*.scss'])
   .pipe(sass())
   //.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError)) // compressed files
   .pipe(gulp.dest("src/assets/css"))
@@ -13,7 +13,7 @@ gulp.task('sass', function(){
 
 // Mover JS src/js
 gulp.task('js', function(){
-  return gulp.src(['node_modules/bootstrap/dist/js/bootstrap.min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/popper.js/dist/umd/popper.min.js'])
+  return gulp.src(['node_modules/bootstrap/dist/js/bootstrap.min.js','node_modules/slick-carousel/slick/slick.min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/popper.js/dist/umd/popper.min.js'])
   .pipe(gulp.dest("src/assets/js"))
   .pipe(browserSync.stream());
 });
@@ -22,7 +22,8 @@ gulp.task('js', function(){
 // Servidor para olhar os HTML/SCSS
 gulp.task('server', ['sass'], function(){
   browserSync.init({
-  server: "./src"
+    server: "./src",
+    port: 3010
   });
 
   gulp.watch(['node_modules/bootstrap/scss/bootstrap.scss', 'node_modules/bootstrap/scss/_custom.scss', 'src/scss/*.scss'], ['sass']);
